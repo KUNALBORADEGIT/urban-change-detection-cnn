@@ -1,0 +1,82 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# =========================
+# Dataset (DO NOT UPLOAD)
+# =========================
+data/
+datasets/
+*.zip
+*.tar
+*.gz
+
+# =========================
+# Model Checkpoints
+# =========================
+*.pth
+*.pt
+*.ckpt
+checkpoints/
+models/
+weights/
+
+# =========================
+# Logs & Experiments
+# =========================
+logs/
+runs/
+wandb/
+experiments/
+*.log
+
+# =========================
+# Jupyter
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# IDE Files
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Build / Output Files
+# =========================
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.csv
+*.npy
+*.npz
+
+# =========================
+# Presentation Exports
+# =========================
+presentation/*.mp4
+presentation/*.mov
+
+# =========================
+# Misc
+# =========================
+*.bak
+*.tmp
