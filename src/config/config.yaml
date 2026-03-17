@@ -3,18 +3,20 @@ data:
   img_size: [256, 256]
 
 model:
+  name: "unet"        # default model (can be overridden via CLI)
   base_channels: 32
 
 train:
-  use_cuda: true
+  use_cuda: false
   batch_size: 8
-  num_workers: 2
-  epochs: 20
+  num_workers: 0
+  epochs: 50
   lr: 0.0003
   weight_decay: 0.01
-  threshold: 0.5
+  threshold: 0.45
 
-  loss: "dice_bce"   # "bce" or "dice_bce"
+  loss: "dice_bce"
   bce_weight: 0.5
 
-  out_dir: "runs/unet_baseline"
+  # This will automatically be overridden by main.py based on --model
+  out_dir: "runs/default"

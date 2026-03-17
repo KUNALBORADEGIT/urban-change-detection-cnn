@@ -4,9 +4,7 @@ import torch
 from torch.utils.data import DataLoader
 
 from src.utils.dataset import LevirCDDataset
-from src.models.unet import UNet
-from src.utils.train import evaluate
-from src.utils.train import DiceBCELoss
+from src.utils.train import evaluate, DiceBCELoss
 
 
 def load_best_checkpoint(model, ckpt_path, device):
@@ -15,8 +13,10 @@ def load_best_checkpoint(model, ckpt_path, device):
     return ckpt
 
 
-def run_test(cfg):
+def run_test(cfg, build_model_fn):
     device = "cuda" if torch.cuda.is_available() and cfg["train"]["use_cuda"] else "cpu"
+    print(f"[INFO] device = {device}")
+    print(f"[INFO] model  = {cfg['model']['name']}")
 
     test_ds = LevirCDDataset(
         cfg["data"]["root_dir"],
@@ -33,11 +33,7 @@ def run_test(cfg):
         pin_memory=(device == "cuda"),
     )
 
-    model = UNet(
-        in_channels=6,
-        out_channels=1,
-        base=cfg["model"]["base_channels"],
-    ).to(device)
+    model = build_model_fn(cfg).to(device)
 
     ckpt_path = Path(cfg["train"]["out_dir"]) / "best.pt"
     load_best_checkpoint(model, str(ckpt_path), device)
@@ -59,17 +55,19 @@ def run_test(cfg):
     print(f"loss      : {metrics['loss']:.4f}")
     print(f"iou       : {metrics['iou']:.4f}")
     print(f"f1        : {metrics['f1']:.4f}")
+    print(f"accuracy  : {metrics['accuracy']:.4f}")
     print(f"precision : {metrics['precision']:.4f}")
     print(f"recall    : {metrics['recall']:.4f}")
 
     out_csv = Path(cfg["train"]["out_dir"]) / "test_metrics.csv"
     with open(out_csv, "w", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow(["loss", "iou", "f1", "precision", "recall"])
+        writer.writerow(["loss", "iou", "f1", "accuracy", "precision", "recall"])
         writer.writerow([
             metrics["loss"],
             metrics["iou"],
             metrics["f1"],
+            metrics["accuracy"],
             metrics["precision"],
             metrics["recall"],
         ])
