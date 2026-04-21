@@ -27,7 +27,7 @@ datasets/
 *.pt
 *.ckpt
 checkpoints/
-models/
+# models/
 weights/
 
 # =========================
