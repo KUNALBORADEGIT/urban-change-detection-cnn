@@ -7,7 +7,7 @@ model:
   base_channels: 32
 
 train:
-  use_cuda: false
+  use_cuda: false # set true if GPU is available 
   batch_size: 8
   num_workers: 0
   epochs: 50

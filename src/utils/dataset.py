@@ -5,6 +5,7 @@ from typing import Tuple, Optional, List
 from PIL import Image
 import torch
 from torch.utils.data import Dataset
+import numpy as np
 
 
 def _find_dir(base: Path, candidates: List[str]) -> Path:
@@ -76,7 +77,7 @@ class LevirCDDataset(Dataset):
 
     def _to_tensor_rgb(self, img: Image.Image) -> torch.Tensor:
         # [H,W,3] -> [3,H,W], float [0,1]
-        t = torch.from_numpy(__import__("numpy").array(img)).permute(2, 0, 1).float() / 255.0
+        t = torch.from_numpy(np.array(img)).permute(2, 0, 1).float() / 255.0
         return t
 
     def _to_tensor_mask(self, m: Image.Image) -> torch.Tensor:
