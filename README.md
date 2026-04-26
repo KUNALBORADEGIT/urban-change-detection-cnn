@@ -86,7 +86,7 @@ pip install -r requirements.txt
 
 This project uses the **LEVIR-CD** dataset — a large-scale benchmark for building change detection in very high-resolution satellite imagery.
 
-1. Download the dataset from: https://chenhao.in/LEVIR/
+1. Download the dataset from: https://www.kaggle.com/datasets/mdrifaturrahman33/levir-cd
 2. Extract and place it so the folder structure matches:
 
 ```
